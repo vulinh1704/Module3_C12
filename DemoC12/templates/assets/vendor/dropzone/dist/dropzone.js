@@ -7281,9 +7281,9 @@ var defaultOptions = {
   renameFile: null,
 
   /**
-   * If `true` the fallback will be forced. This is very useful to test your server
+   * If `true` the fallback will be forced. This is very useful to test.txt your server
    * implementations first and make sure that everything works as
-   * expected without dropzone if you experience problems, and to test
+   * expected without dropzone if you experience problems, and to test.txt
    * how your fallbacks will look.
    */
   forceFallback: false,

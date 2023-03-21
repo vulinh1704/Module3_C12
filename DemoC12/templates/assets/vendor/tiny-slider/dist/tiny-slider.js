@@ -162,11 +162,11 @@ function mediaquerySupport () {
       docOverflow = setFakeBody(body),
       div = doc.createElement('div'),
       style = doc.createElement('style'),
-      rule = '@media all and (min-width:1px){.tns-mq-test{position:absolute}}',
+      rule = '@media all and (min-width:1px){.tns-mq-test.txt{position:absolute}}',
       position;
 
   style.type = 'text/css';
-  div.className = 'tns-mq-test';
+  div.className = 'tns-mq-test.txt';
 
   body.appendChild(style);
   body.appendChild(div);
