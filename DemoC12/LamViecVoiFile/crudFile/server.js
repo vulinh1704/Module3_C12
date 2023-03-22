@@ -1,8 +1,12 @@
 const http = require('http');
 const fs = require('fs');
 let qs = require('qs');
+let url = require('url')
 
 let server = http.createServer((req, res) => {
+    let match = /\.js|\.css|\.png|\.jpg|\.ttf|\.woff|\.woff2|\.eot/
+    console.log(match.test(req.url))
+    console.log(__dirname)
     if (req.method === 'GET') {
         fs.readFile('./views/index.html', "utf-8", (err, indexHtml) => {
             let people = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
@@ -14,6 +18,7 @@ let server = http.createServer((req, res) => {
                     <td>${people[i].name}</td>
                     <td>${people[i].age}</td>
                     <td>${people[i].sex}</td>
+                    <td><img src="${people[i].image}" style="width: 40px;height:40px;"></td>
                     <td><button class="btn btn-outline-info">Sửa</button></td>
                     <td>
                     <form method="post">
@@ -36,9 +41,12 @@ let server = http.createServer((req, res) => {
         })
         req.on('end', () => {
             let user = qs.parse(data);
+            console.log(user)
             if (user.idDelete) {
                 let people = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'))
-                let index = people.findIndex(item => {return item.id === user.idDelete});
+                let index = people.findIndex(item => {
+                    return item.id === user.idDelete
+                });
                 people.splice(index, 1);
                 fs.writeFileSync('./data/data.json', JSON.stringify(people));
                 res.writeHead(301, {location: '/'});
