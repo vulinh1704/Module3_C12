@@ -5,8 +5,6 @@ let url = require('url')
 
 let server = http.createServer((req, res) => {
     let match = /\.js|\.css|\.png|\.jpg|\.ttf|\.woff|\.woff2|\.eot/
-    console.log(match.test(req.url))
-    console.log(__dirname)
     if (req.method === 'GET') {
         fs.readFile('./views/index.html', "utf-8", (err, indexHtml) => {
             let people = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'));
@@ -41,7 +39,6 @@ let server = http.createServer((req, res) => {
         })
         req.on('end', () => {
             let user = qs.parse(data);
-            console.log(user)
             if (user.idDelete) {
                 let people = JSON.parse(fs.readFileSync('./data/data.json', 'utf-8'))
                 let index = people.findIndex(item => {
